@@ -92,7 +92,7 @@ def key_figures():
     kff('exchange', d.exchange, 100)
     kff('sector', d.sector, 105)
     kff('country', d.country, 115)
-    kff('employees', d.employees, 120)
+    kff('ebitda', d.ebitda, 120)
     kff('revenue', d.revenue, 125)
     kff('week high 52', d.week_high_52, 130)
     kff('week low 52', d.week_low_52, 135)
