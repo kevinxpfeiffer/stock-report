@@ -6,8 +6,10 @@ from alpha_vantage.foreignexchange import ForeignExchange
 
 
 # Get name and ticker
-name = str(input('Which company should be analyzed?'))
-ticker = str(input("What's the company's ticker?"))
+print('Which company should be analyzed?')
+name = str(input("--> "))
+print("What's the company's ticker?")
+ticker = str(input("--> "))
 print('One moment please, PDF is being generated...')
 
 
