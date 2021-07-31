@@ -4,6 +4,7 @@ from datetime import date
 
 # Package Libraries
 import data as d
+import esg
 
 # Formats A4 Letter
 WIDTH = 210
@@ -104,7 +105,7 @@ def key_figures():
     kff('short', d.shares_short, 165)
     kff('institutions', d.percent_institutions, 170)
     kff('last split', d.last_split_date, 175)
-
+    kff('ESG', esg.esg, 180)
 
 def score():
     """

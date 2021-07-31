@@ -3,6 +3,7 @@ import data as d
 import analysis
 import shutil
 
+
 # create hole pdf document
 p.new_page()
 p.create_title()
@@ -20,10 +21,6 @@ shutil.move(f'{d.name}.pdf', '/Users/kevinpfeiffer/Downloads')
 print('PDF is ready!!!')
 
 
-# ? Versiedene Comments
-# ! Warning
-# TODO This is a ToDo
-# * Other method
 
 
 
