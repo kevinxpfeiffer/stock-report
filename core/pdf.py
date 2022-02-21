@@ -1,5 +1,6 @@
 # pdf.py
-# Copyright 2021 Kevin Pfeiffer
+# stock-report
+# Copyright 2022 Kevin Pfeiffer
 # MIT License
 
 from fpdf import FPDF
@@ -7,7 +8,7 @@ from datetime import date
 
 # Hilfs defintion für Datenabfrage, um API Begrenzung zu umgehen.
 def category(data, category):
-    category_data = data[0]
+    category_data = data
     category_data = category_data[category].values[0]
     return category_data
 

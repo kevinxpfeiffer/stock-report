@@ -1,9 +1,14 @@
+# analysis.py
+# stock-report
+# Copyright 2022 Kevin Pfeiffer
+# MIT License
+
 from scipy.stats import norm
 import plotly.express as px
 
 class ANALYSIS:
     def __init__(self, data):
-        self.data = data.prices()
+        self.data = data.daily_prices()
 
     def main(self):
         
