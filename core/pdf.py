@@ -5,6 +5,13 @@
 from fpdf import FPDF
 from datetime import date
 
+# Hilfs defintion für Datenabfrage, um API Begrenzung zu umgehen.
+def category(data, category):
+    category_data = data[0]
+    category_data = category_data[category].values[0]
+    return category_data
+
+
 class PDF: # PDF(FPDF)
     def __init__(self, data, esg, name, ticker):
         self.date = date.today()
@@ -91,13 +98,16 @@ class PDF: # PDF(FPDF)
         """
 
         """
+        # Daten abfrage
+        data = self.data.company_overview()
+        
         self.kff("market price !", 0, 90)
-        self.kff("currency", self.data.fundamental("Currency"), 95)
-        self.kff("exchange", self.data.fundamental("Exchange"), 100)
-        #self.kff("sector", self.data.fundamental("Sector"), 105)
-        #self.kff("country", self.data.fundamental("Country"), 115)
-        self.kff("ebitda", self.data.fundamental("EBITDA"), 120)
-        self.kff("revenue", self.data.fundamental("RevenueTTM"), 125)
+        self.kff("currency", category(data, "Currency"), 95)
+        self.kff("exchange", category(data, "Exchange"), 100)
+        self.kff("sector", category(data, "Sector"), 105)
+        self.kff("country", category(data, "Country"), 115)
+        self.kff("ebitda", category(data, "EBITDA"), 120)
+        self.kff("revenue", category(data, "RevenueTTM"), 125)
         self.kff("ESG", self.esg, 130) #!
 
     def score(self):

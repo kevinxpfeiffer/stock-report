@@ -1,7 +1,9 @@
 import data
+import analysis
 
-d = data.DATA("Apple", "AAPL")
+d = data.DATA(name="Amazon", ticker="AMZN")
+a = analysis.ANALYSIS(data=d)
 
-print(d.fundamental("Exchange"))
+a.main()
 
 

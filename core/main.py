@@ -4,8 +4,9 @@
 
 import shutil
 import data
-import esg
 import pdf
+import esg
+import analysis
 
 
 loop = True
@@ -20,8 +21,11 @@ while loop:
         
         d = data.DATA(name=name, ticker=ticker)
         e = esg.ESG(name=name).esg()
-        p = pdf.PDF(data=d, esg=e, name=name, ticker=ticker)
+       
+        a = analysis.ANALYSIS(data=d)
+        a.main() # run analysis
         
+        p = pdf.PDF(data=d, esg=e, name=name, ticker=ticker)
         p.new_page()
         p.create_title()
         p.create_box_key_figures()
@@ -32,9 +36,10 @@ while loop:
         p.plots()
 
         p.pdf.output(f'{name}.pdf', 'F')
-                # two variants:
+        # two variants:
         shutil.move(f'{name}.pdf', '/Users/kevinpfeiffer/Downloads')
                 # shutil.move(f'{d.stock_name}.pdf', './examples')
+                
         print('PDF is ready!!!')
 
 
