@@ -1,24 +1,46 @@
-import pdf as p
-import data as d
-import analysis
+# main.py
+# Copyright 2021 Kevin Pfeiffer
+# MIT License
+
 import shutil
+import data
+import pdf
+import esg
+import analysis
 
 
-# create hole pdf document
-p.new_page()
-p.create_title()
-p.create_box_key_figures()
-p.key_figures()
-p.create_box_score()
-p.score()
-p.new_page()
-p.plots()
+loop = True
 
-p.pdf.output(f'{d.name}.pdf', 'F')
-# two variants:
-shutil.move(f'{d.name}.pdf', '/Users/kevinpfeiffer/Downloads')
-# shutil.move(f'{d.stock_name}.pdf', './examples')
-print('PDF is ready!!!')
+while loop:
+        print('Which company should be analyzed?')
+        name = str(input("--> "))
+        print("What's the company's ticker?")
+        ticker = str(input("--> "))
+        print('One moment please, PDF is being generated...')
+        
+        
+        d = data.DATA(name=name, ticker=ticker)
+        e = esg.ESG(name=name).esg()
+       
+        a = analysis.ANALYSIS(data=d)
+        a.main() # run analysis
+        
+        p = pdf.PDF(data=d, esg=e, name=name, ticker=ticker)
+        p.new_page()
+        p.create_title()
+        p.create_box_key_figures()
+        p.key_figures()
+        p.create_box_score()
+        p.score()
+        p.new_page()
+        p.plots()
+
+        p.pdf.output(f'{name}.pdf', 'F')
+        # two variants:
+        shutil.move(f'{name}.pdf', '/Users/kevinpfeiffer/Downloads')
+                # shutil.move(f'{d.stock_name}.pdf', './examples')
+                
+        print('PDF is ready!!!')
 
 
 
