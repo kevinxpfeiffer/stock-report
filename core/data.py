@@ -17,17 +17,21 @@ class DATA:
         self.name = name
         self.ticker = ticker
     
+    
     # Get Alpha Vantage Keys
     api_key_1 = os.getenv("ALPHAVANTAGE_API_KEY_1")
     api_key_2 = os.getenv("ALPHAVANTAGE_API_KEY_2")
     api_key_3 = os.getenv("ALPHAVANTAGE_API_KEY_3")
     api_key_4 = os.getenv("ALPHAVANTAGE_API_KEY_4")
 
+
     # Define various Alpha Vantage classes
     fd = FundamentalData(key=api_key_1, output_format="pandas")
     ts = TimeSeries(key=api_key_2, output_format="pandas")
     fo = ForeignExchange(key=api_key_3, output_format="pandas")
     tsss = TimeSeries(key=api_key_4, output_format="pandas")
+    
+    fd_bs = FundamentalData(key=api_key_3, output_format="pandas")
     
 
     # Fundamental Data
@@ -37,85 +41,104 @@ class DATA:
         and other key metrics for the equity specified. 
         Data is generally refreshed on the same day a company reports its latest 
         earnings and financials.
+        :return: company overview data
         """
         company_overview_data = self.fd.get_company_overview(symbol=self.ticker)
         company_overview_data = company_overview_data[0]
         return company_overview_data
+    
     
     def income_statement(self):
         """
         Returns the annual income statements for the company of interest. 
         Data is generally refreshed on the same day a company reports its latest 
         earnings and financials.
+        :return: income statement data
         """
         income_statement_data = self.fd.get_income_statement_annual(symbol=self.ticker)
         income_statement_data = income_statement_data[0]
+        income_statement_data = income_statement_data.reset_index()
+        income_statement_data = income_statement_data.iloc[: , 1:]
         return income_statement_data
+    
     
     def balance_sheet(self):
         """
         Returns the annual balance sheets for the company of interest.
         Data is generally refreshed on the same day a company reports its latest 
         earnings and financials.
+        :return: balance sheet data
         """
-        balance_sheet_data = self.fd.get_balance_sheet_annual(symbol=self.ticker)
+        balance_sheet_data = self.fd_bs.get_balance_sheet_annual(symbol=self.ticker)
         balance_sheet_data = balance_sheet_data[0]
+        balance_sheet_data = balance_sheet_data.reset_index()
+        balance_sheet_data = balance_sheet_data.iloc[: , 1:]
         return balance_sheet_data
+    
     
     def cash_flow(self):
         """
         Returns the annual cash flows for the company of interest.
         Data is generally refreshed on the same day a company reports its latest 
         earnings and financials.
+        :return: cashflow data
         """
         cash_flow_data = self.fd.get_cash_flow_annual(symbol=self.ticker)
         cash_flow_data = cash_flow_data[0]
+        cash_flow_data = cash_flow_data.reset_index()
+        cash_flow_data = cash_flow_data.iloc[: , 1:]
         return cash_flow_data
+    
     
     # Time Series
     def daily_prices(self):
         """ 
         Return daily time series in two json objects as data and
         meta data. It raises ValueError when problems arise.
+        :return: daily prices data
         """
         daily_prices_data = self.ts.get_daily(symbol=self.ticker, outputsize="full")
         daily_prices_data = daily_prices_data[0]
         return daily_prices_data
     
+    
     def quote(self):
         """ 
         Return the latest price and volume information for a
-         security of your choice.
+        security of your choice.
+        :return: quote data
         """
         quote_data = self.ts.get_quote_endpoint(symbol=self.ticker)
         quote_data = quote_data[0]
         return quote_data
+    
     
     # Foreign Exchange
     def exchange_rate(self, from_currency, to_currency):
         """ 
         Returns the realtime exchange rate for any pair of physical
         currency (e.g., EUR) or physical currency (e.g., USD).
-        Keyword Arguments:
-            from_currency: The currency you would like to get the exchange rate
+        :param from_currency: he currency you would like to get the exchange rate
             for. It can either be a physical currency or digital/crypto currency.
             For example: from_currency=USD or from_currency=BTC.
-            to_currency: The destination currency for the exchange rate.
+        :param to_currency: The destination currency for the exchange rate.
             It can either be a physical currency or digital/crypto currency.
-            For example: to_currency=USD or to_currency=BTC.
+            For example: to_currency=USD or to_currency=BTC.     
+        :return: exchange rate data
         """
         exchange_rate_data = self.fo.get_currency_exchange_rate(from_currency=from_currency, to_currency=to_currency)
         exchange_rate_data = exchange_rate_data[0]
         exchange_rate_data = exchange_rate_data["5. Exchange Rate"].values[0]
         return exchange_rate_data
     
+    
     # Symbol Search
     def symbol_search(self, keyword):
         """ 
         Return best matching symbols and market information
         based on keywords. It raises ValueError when problems arise.
-        Keyword Arguments:
-            keywords: the keywords to query on
+        :param keyword: name of company as string
+        :return: symbol search data
         """
         symbol_search_data = self.tsss.get_symbol_search(keywords=keyword)
         symbol_search_data = symbol_search_data[0]
