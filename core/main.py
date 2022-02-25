@@ -4,6 +4,7 @@
 # MIT License
 
 import shutil
+import os
 import time
 import data
 import analysis
@@ -63,9 +64,9 @@ while True:
 
                 p.pdf.output(f'{name}.pdf', 'F') # Create pdf
                 
-                # -> change your destination folder here 
-                shutil.move(f'{name}.pdf', '/Users/kevinpfeiffer/Downloads') # Move pdf to output folder
-                # -> change your destination folder here
+                download_folder = os.path.expanduser("~")+"/Downloads/"
+                shutil.move(f'{name}.pdf', download_folder) # Move pdf to output folder
+        
                                 
                 print('PDF is ready!!!')
                 print("You can quit with ctrl + c everytime.")
