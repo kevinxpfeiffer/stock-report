@@ -43,7 +43,6 @@ or
 
 ## Examples
 Run with
-
 ```
 python3 -m stock-report
 ```
