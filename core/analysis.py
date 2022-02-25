@@ -5,12 +5,16 @@
 
 from scipy.stats import norm
 import plotly.express as px
+import pandas as pd
+
 
 class ANALYSIS:
     def __init__(self, data):
         self.data = data.daily_prices()
 
     def main(self):
+        
+        pd.options.mode.chained_assignment = None  # Disable SettingWithCopyWarning
         
         data = self.data[['4. close']]
         ticker = data[::-1]  # reverse dataframe for better calculation

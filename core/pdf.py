@@ -8,10 +8,9 @@ from datetime import date
 
 
 class PDF: # PDF(FPDF)
-    def __init__(self, data, esg, name, ticker):
+    def __init__(self, data, name, ticker):
         self.date = date.today()
         self.data = data
-        self.esg = esg
         self.name = name
         self.ticker = ticker
         self.width = 210
@@ -30,6 +29,7 @@ class PDF: # PDF(FPDF)
         self.pdf.image("./resources/header.png", 0, 0, self.width)
         self.pdf.image("./resources/footer.png", 0, 252, self.width)
 
+
     def create_title(self):
         """
         Creates title with name and ticker
@@ -42,6 +42,7 @@ class PDF: # PDF(FPDF)
         self.pdf.set_font("Arial", "", 10)
         self.pdf.write(4, f"Created: {self.date}")
         self.pdf.ln(5)
+    
     
     def create_heading(self, headline):
         """
@@ -57,23 +58,12 @@ class PDF: # PDF(FPDF)
         self.pdf.write(4, f"Symbol: {self.ticker}")
         self.pdf.ln(5)
 
-    def create_box_score(self):
-        """
-        creates box for Score
-        :return:
-        """
-        self.pdf.line(self.width / 2 + 10, 75, self.width / 2 + 10, 100)
-        self.pdf.line(self.width / 2 + 10, 75, 200, 75)
-        self.pdf.line(200, 100, self.width / 2 + 10, 100)
-        self.pdf.line(200, 100, 200, 75)
-        self.pdf.set_font("Arial", "b", 14)
-        self.pdf.set_xy(self.width / 2 + 11, 80)
-        self.pdf.cell(0, txt="Score")
 
     def category_key_figures(self, data, category):
         category_data = data
         category_data = category_data[category].values[0]
         return category_data
+
 
     def category_annual_report(self, data, year ,category):
     # year -> start with 0 for latest year
@@ -82,8 +72,10 @@ class PDF: # PDF(FPDF)
         category_annual_report = category_annual_report.iloc[year:end , :]
         category_annual_report = category_annual_report[category].values[0]
         return category_annual_report
-
-    def kff(self, data, key, category, y):
+    
+    
+    def kff(self, data, key, category, y, key_style="", value_style="", left_position=True, thounsands_sign=False,
+            color="", value_green=0, value_red=0):
         """
         Creates Template for key_figures()
         :param key: name of key as string
@@ -91,40 +83,65 @@ class PDF: # PDF(FPDF)
         :param y: position of y in mm
         :return:
         """
-        self.pdf.set_font("Arial", "b", 12)
-        self.pdf.set_xy(15, y)
+        
+        # x position
+        if left_position:
+            x_key = 10
+            x_value = 70
+        else:
+            x_key = 115
+            x_value = 175
+        
+        # format of key
+        self.pdf.set_font("Arial", key_style, 12)
+        self.pdf.set_xy(x_key, y)
         self.pdf.cell(0, txt=f"{key}")
         
-        self.pdf.set_font("Arial", "", 12)
+        # set value
         value = self.category_key_figures(data, category)
-        self.pdf.set_xy(70, y)
+        
+        # color of value
+        try:
+            try:
+                value = int(value)
+            except:
+                value = float(value)
+            if color == "greater_green":
+                if value > value_green:
+                    self.pdf.set_text_color(77, 201, 207)
+                elif value < value_red:
+                    self.pdf.set_text_color(253, 87, 75)
+                else:
+                    self.pdf.set_text_color(0, 0, 0)
+            elif color == "less_green":
+                if value < value_green:
+                    self.pdf.set_text_color(77, 201, 207)
+                elif value > value_red:
+                    self.pdf.set_text_color(253, 87, 75)
+                else:
+                    self.pdf.set_text_color(0, 0, 0)
+            else:
+                self.pdf.set_text_color(0, 0, 0)
+        except:
+            self.pdf.set_text_color(0, 0, 0)
+        
+        # thousands sign for value
+        if thounsands_sign:
+            try:
+                value = int(value) # for seperation
+                value = f'{value:,}'
+            except:
+                value = value
+        else: 
+            value = value
+        
+        # format of value
+        self.pdf.set_font("Arial", value_style, 12)
+        self.pdf.set_xy(x_value, y)
         self.pdf.cell(0, txt=f"{value}")
-
-    def key_figures(self):
-        """
-
-        """
-        # acces data
-        data_co = self.data.company_overview()
-        data_qu = self.data.quote()
+        self.pdf.set_text_color(0, 0, 0)
         
-        # y abstand immer 5
-        self.kff(data_qu, "price", "05. price", 70)
-        self.kff(data_qu, "change", "09. change", 75)
-        self.kff(data_qu, "change %", "10. change percent", 80)
-        self.kff(data_qu, "volume", "06. volume", 85)
-        
-        self.kff(data_qu, "symbol", "01. symbol", 90)
-        self.kff(data_co, "exchange", "Exchange", 95)
-        self.kff(data_co, "currency", "Currency", 100)
-        self.kff(data_co, "exchange", "Exchange", 105)
-   
-        self.kff(data_co, "sector", "Sector", 110)
-        self.kff(data_co, "industry", "Industry", 115)
-    
-        self.kff(data_co, "ebitda", "EBITDA", 125)
-        self.kff(data_co, "revenue", "RevenueTTM", 130)
-    
+            
     def arf(self, data, key, category, y, key_style="", value_style=""):
         self.pdf.set_font("Arial", key_style, 12)
         self.pdf.set_xy(10, y)
@@ -157,11 +174,78 @@ class PDF: # PDF(FPDF)
         except:
             value_3 = value_3
         self.pdf.cell(0, txt=f"{value_3}")
+
+
+    def key_figures(self):
+        """
+
+        """
+        # acces data
+        data_co = self.data.company_overview()
+        data_qu = self.data.quote()
     
+        # y abstand immer 5
+        self.kff(data_co, "Industry", "Industry", 70)
+        self.kff(data_co, "Sector", "Sector", 75)
+        self.kff(data_co, "Country", "Country", 80)
+        self.kff(data_co, "Exchange", "Exchange", 85)
+        self.kff(data_co, "Currency", "Currency", 90)
+        self.kff(data_co, "Fiscal Year End", "FiscalYearEnd", 95)
+        self.kff(data_co, "Latest Quarter", "LatestQuarter", 100)
         
-    def income_statement_pdf(self):
+        self.kff(data_co, "Market Capitalization", "MarketCapitalization", 110, thounsands_sign=True)
+        self.kff(data_co, "Shares Outstanding", "SharesOutstanding", 115, thounsands_sign=True)
+        
+        self.kff(data_co, "Revenue", "RevenueTTM", 125, thounsands_sign=True)
+        self.kff(data_co, "Gross Profit", "GrossProfitTTM", 130, thounsands_sign=True)
+        self.kff(data_co, "EBITDA", "EBITDA", 135, thounsands_sign=True)
+        
+        self.kff(data_co, "Earnings per Share", "EPS", 145)
+        self.kff(data_co, "Quarterly Earnings Growth", "QuarterlyEarningsGrowthYOY", 150)
+        self.kff(data_co, "Revenue per Share", "RevenuePerShareTTM", 155)
+        self.kff(data_co, "Quarterly Revenue Growth", "QuarterlyRevenueGrowthYOY", 160)
+        
+        self.kff(data_co, "Return on Assets", "ReturnOnAssetsTTM", 170)
+        self.kff(data_co, "Return on Equity", "ReturnOnEquityTTM", 175)
+        
+        self.kff(data_co, "Profit Margin", "ProfitMargin", 185)
+        self.kff(data_co, "Operating Margin", "OperatingMarginTTM", 190)
+        
+        self.kff(data_co, "Price to Earnings", "PERatio", 200)
+        self.kff(data_co, "PE Forward", "ForwardPE", 205)
+        self.kff(data_co, "Price to Earnings Growth", "PEGRatio", 210)
+        self.kff(data_co, "Enterprise Value to Revenue", "EVToRevenue", 215)
+        self.kff(data_co, "Enterprise Value to EBITDA", "EVToEBITDA", 220)
+        self.kff(data_co, "Price to Sales", "PriceToSalesRatioTTM", 225)
+        self.kff(data_co, "Price to Book", "PriceToBookRatio", 230)
+        self.kff(data_co, "Book Value", "BookValue", 235)
+        self.kff(data_co, "Beta", "Beta", 240)
+        
+        self.kff(data_qu, "Price", "05. price", 110, "b", "b", left_position=False)
+        self.kff(data_qu, "Change", "09. change", 115, left_position=False)
+        self.kff(data_qu, "Percent Change", "10. change percent", 120, color="greater_green", left_position=False)
+        
+        self.kff(data_qu, "Open", "02. open", 130, left_position=False)
+        self.kff(data_qu, "High", "03. high", 135, left_position=False)
+        self.kff(data_qu, "Low", "04. low", 140, left_position=False)
+        self.kff(data_qu, "Previous Close", "08. previous close", 145, left_position=False)
+        self.kff(data_qu, "Volume", "06. volume", 150, thounsands_sign=True, left_position=False)
+
+        self.kff(data_co, "52 Week High", "52WeekHigh", 160, left_position=False)
+        self.kff(data_co, "52 Week Low", "52WeekLow", 165, left_position=False)
+        self.kff(data_co, "50 Day Moving Average", "50DayMovingAverage", 170, left_position=False)
+        self.kff(data_co, "200 Day Moving Average", "200DayMovingAverage", 175, left_position=False)
+        
+        self.kff(data_co, "Analyst Target Price", "AnalystTargetPrice", 185, left_position=False)
+        
+        self.kff(data_co, "Dividend per Share", "DividendPerShare", 195, left_position=False)
+        self.kff(data_co, "Dividend Yield", "DividendYield", 200, left_position=False)
+        self.kff(data_co, "Dividend Date", "DividendDate", 205, left_position=False)
+        self.kff(data_co, "Ex Dividend Date", "ExDividendDate", 210, left_position=False)
+        
+        
+    def income_statement(self):
         '''
-        
         '''
         data_in = self.data.income_statement()
         
@@ -200,7 +284,7 @@ class PDF: # PDF(FPDF)
         self.arf(data_in, "Cost of Goods and Services Sold", "costofGoodsAndServicesSold", 230)
         
         
-    def balance_sheet_pdf(self):
+    def balance_sheet(self):
         '''
         '''
         data_bs = self.data.balance_sheet()
@@ -247,7 +331,7 @@ class PDF: # PDF(FPDF)
         self.arf(data_bs, "Common Stock Shares Outstanding", "commonStockSharesOutstanding", 235)
         
         
-    def cash_flow_pdf(self):
+    def cash_flow(self):
         '''
         '''
         data_cs = self.data.cash_flow()
@@ -285,24 +369,8 @@ class PDF: # PDF(FPDF)
         self.arf(data_cs, "Change in Cash and Cash Equivalents", "changeInCashAndCashEquivalents", 210)
         self.arf(data_cs, "Change in Exchange Rate", "changeInExchangeRate", 215)
         
-        
-    def score(self):
-        """
-        Creates score for Score Box
-        :return:
-        """
-        analysed_score = 5  # Score insert analysis data
-        self.pdf.set_font("Arial", "b", 30)
-        self.pdf.set_xy(self.width - 30, 90)
-        if analysed_score > 7:
-            self.pdf.set_text_color(0, 204, 0)
-        elif 7 >= analysed_score > 5:
-            self.pdf.set_text_color(255, 204, 0)
-        else:
-            self.pdf.set_text_color(255, 0, 0)
-        self.pdf.cell(0, txt=f"{analysed_score}")
 
-    def plots(self):
+    def technical_analysis(self):
         """
         Insert plots in PDF
         """

@@ -4,11 +4,10 @@
 # MIT License
 
 import shutil
+import time
 import data
 import analysis
 import pdf
-import esg
-
 
 print("")
 print("Welcome to Stock Report...")
@@ -34,34 +33,33 @@ while True:
         print("")
                 
         d = data.DATA(name=name, ticker=ticker) # Create object data
-        e = esg.ESG(name=name).esg() # Create object esg
         a = analysis.ANALYSIS(data=d) # Create object analysis
                 
         a.main() # run analysis
                 
-        p = pdf.PDF(data=d, esg=e, name=name, ticker=ticker) # Create object pdf
+        p = pdf.PDF(data=d, name=name, ticker=ticker) # Create object pdf
                 
         p.new_page()
         p.create_title()
         p.key_figures()
-        p.create_box_score()
-        p.score()
                 
+        time.sleep(60) # time sleep for alpha vantage api
+        
         p.new_page()
         p.create_heading("Income Statement")
-        # p.income_statement_pdf()
+        p.income_statement()
                 
         p.new_page()
         p.create_heading("Balance Sheet")
-        # p.balance_sheet_pdf()
+        p.balance_sheet()
                 
         p.new_page()
         p.create_heading("Cashflow")
-        p.cash_flow_pdf()
+        p.cash_flow()
                 
         p.new_page()
         p.create_heading("Technical Analysis")
-        p.plots()
+        p.technical_analysis()
 
         p.pdf.output(f'{name}.pdf', 'F') # Create pdf
         shutil.move(f'{name}.pdf', '/Users/kevinpfeiffer/Downloads') # Move pdf to output folder

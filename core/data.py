@@ -19,22 +19,15 @@ class DATA:
     
     
     # Get Alpha Vantage Keys
-    api_key_1 = os.getenv("ALPHAVANTAGE_API_KEY_1")
-    api_key_2 = os.getenv("ALPHAVANTAGE_API_KEY_2")
-    api_key_3 = os.getenv("ALPHAVANTAGE_API_KEY_3")
-    api_key_4 = os.getenv("ALPHAVANTAGE_API_KEY_4")
-
-
+    api_key = os.getenv("ALPHAVANTAGE_API_KEY")
+    
+    
     # Define various Alpha Vantage classes
-    fd = FundamentalData(key=api_key_1, output_format="pandas")
-    ts = TimeSeries(key=api_key_2, output_format="pandas")
-    fo = ForeignExchange(key=api_key_3, output_format="pandas")
-    tsss = TimeSeries(key=api_key_4, output_format="pandas")
-    
-    fd_bs = FundamentalData(key=api_key_3, output_format="pandas")
+    fd = FundamentalData(key=api_key, output_format="pandas")
+    ts = TimeSeries(key=api_key, output_format="pandas")
+    fo = ForeignExchange(key=api_key, output_format="pandas")
     
 
-    # Fundamental Data
     def company_overview(self):
         """
         Returns the company information, financial ratios, 
@@ -69,7 +62,7 @@ class DATA:
         earnings and financials.
         :return: balance sheet data
         """
-        balance_sheet_data = self.fd_bs.get_balance_sheet_annual(symbol=self.ticker)
+        balance_sheet_data = self.fd.get_balance_sheet_annual(symbol=self.ticker)
         balance_sheet_data = balance_sheet_data[0]
         balance_sheet_data = balance_sheet_data.reset_index()
         balance_sheet_data = balance_sheet_data.iloc[: , 1:]
@@ -90,7 +83,6 @@ class DATA:
         return cash_flow_data
     
     
-    # Time Series
     def daily_prices(self):
         """ 
         Return daily time series in two json objects as data and
@@ -113,7 +105,6 @@ class DATA:
         return quote_data
     
     
-    # Foreign Exchange
     def exchange_rate(self, from_currency, to_currency):
         """ 
         Returns the realtime exchange rate for any pair of physical
@@ -132,7 +123,6 @@ class DATA:
         return exchange_rate_data
     
     
-    # Symbol Search
     def symbol_search(self, keyword):
         """ 
         Return best matching symbols and market information
@@ -140,7 +130,7 @@ class DATA:
         :param keyword: name of company as string
         :return: symbol search data
         """
-        symbol_search_data = self.tsss.get_symbol_search(keywords=keyword)
+        symbol_search_data = self.ts.get_symbol_search(keywords=keyword)
         symbol_search_data = symbol_search_data[0]
         symbol_search_data = symbol_search_data.reset_index()
         symbol_search_data = symbol_search_data[["1. symbol", "2. name", "3. type", "8. currency"]]
