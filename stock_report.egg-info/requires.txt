@@ -1,7 +1,7 @@
 shutil
 os
-time
-datetimealpha-vantage
+datetime
+alpha-vantage
 pandas
 fpdf
 plotly

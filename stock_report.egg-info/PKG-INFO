@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: stock-report
-Version: 0.0.3
+Version: 0.0.4
 Summary: StockReport is a Phyton program that allows you to simply create an automated PDF report about a stock.
 Home-page: https://github.com/pfeiffer-dev/stock-report
 Author: Kevin Pfeiffer
