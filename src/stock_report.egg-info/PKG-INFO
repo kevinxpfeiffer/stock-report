@@ -1,3 +1,22 @@
+Metadata-Version: 2.1
+Name: stock-report
+Version: 0.0.1
+Summary: StockReport is a Phyton program that allows you to simply create an automated PDF report about a stock.
+Home-page: https://github.com/pfeiffer-dev/stock-report
+Author: Kevin Pfeiffer
+Author-email: pfeiffer.kevin@gmx.de
+License: UNKNOWN
+Project-URL: Bug Tracker, https://github.com/pfeiffer-dev/stock-report/issues
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Topic :: Office/Business :: Financial :: Investment
+Classifier: Natural Language :: English
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
 ![Logo StockReport](resources/logo.png "Logo Stock Report")
 
 **Stock Report generates a report on a selected stock**
@@ -68,3 +87,5 @@ print(s)
  
 
  
+
+

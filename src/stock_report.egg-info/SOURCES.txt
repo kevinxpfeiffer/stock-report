@@ -1,0 +1,8 @@
+LICENSE
+README.md
+pyproject.toml
+setup.cfg
+src/stock_report.egg-info/PKG-INFO
+src/stock_report.egg-info/SOURCES.txt
+src/stock_report.egg-info/dependency_links.txt
+src/stock_report.egg-info/top_level.txt
