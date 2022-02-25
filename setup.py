@@ -28,8 +28,7 @@ setup(
     install_requires=[
         'shutil',
         'os',
-        'time',
-        'datetime'
+        'datetime',
         'alpha-vantage',
         'pandas',
         'fpdf',
