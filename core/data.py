@@ -12,7 +12,7 @@ from alpha_vantage.foreignexchange import ForeignExchange
 class DATA:
     def __init__(self, name, ticker):
         """
-        Inherit Data class with its default arguments.
+        Inherit DATA class with its default arguments.
         """
         self.name = name
         self.ticker = ticker
@@ -22,7 +22,7 @@ class DATA:
     api_key = os.getenv("ALPHAVANTAGE_API_KEY")
     
     
-    # Define various Alpha Vantage classes
+    # Define Alpha Vantage classes
     fd = FundamentalData(key=api_key, output_format="pandas")
     ts = TimeSeries(key=api_key, output_format="pandas")
     fo = ForeignExchange(key=api_key, output_format="pandas")
@@ -34,7 +34,7 @@ class DATA:
         and other key metrics for the equity specified. 
         Data is generally refreshed on the same day a company reports its latest 
         earnings and financials.
-        :return: company overview data
+        :return: company overview data as pandas dataframe
         """
         company_overview_data = self.fd.get_company_overview(symbol=self.ticker)
         company_overview_data = company_overview_data[0]
@@ -46,7 +46,7 @@ class DATA:
         Returns the annual income statements for the company of interest. 
         Data is generally refreshed on the same day a company reports its latest 
         earnings and financials.
-        :return: income statement data
+        :return: income statement data as pandas dataframe
         """
         income_statement_data = self.fd.get_income_statement_annual(symbol=self.ticker)
         income_statement_data = income_statement_data[0]
@@ -60,7 +60,7 @@ class DATA:
         Returns the annual balance sheets for the company of interest.
         Data is generally refreshed on the same day a company reports its latest 
         earnings and financials.
-        :return: balance sheet data
+        :return: balance sheet data as pandas dataframe
         """
         balance_sheet_data = self.fd.get_balance_sheet_annual(symbol=self.ticker)
         balance_sheet_data = balance_sheet_data[0]
@@ -74,7 +74,7 @@ class DATA:
         Returns the annual cash flows for the company of interest.
         Data is generally refreshed on the same day a company reports its latest 
         earnings and financials.
-        :return: cashflow data
+        :return: cashflow data as pandas dataframe
         """
         cash_flow_data = self.fd.get_cash_flow_annual(symbol=self.ticker)
         cash_flow_data = cash_flow_data[0]
@@ -87,7 +87,7 @@ class DATA:
         """ 
         Return daily time series in two json objects as data and
         meta data. It raises ValueError when problems arise.
-        :return: daily prices data
+        :return: daily prices data as pandas dataframe
         """
         daily_prices_data = self.ts.get_daily(symbol=self.ticker, outputsize="full")
         daily_prices_data = daily_prices_data[0]
@@ -98,7 +98,7 @@ class DATA:
         """ 
         Return the latest price and volume information for a
         security of your choice.
-        :return: quote data
+        :return: quote data as pandas dataframe
         """
         quote_data = self.ts.get_quote_endpoint(symbol=self.ticker)
         quote_data = quote_data[0]
@@ -115,7 +115,7 @@ class DATA:
         :param to_currency: The destination currency for the exchange rate.
             It can either be a physical currency or digital/crypto currency.
             For example: to_currency=USD or to_currency=BTC.     
-        :return: exchange rate data
+        :return: exchange rate data as a string
         """
         exchange_rate_data = self.fo.get_currency_exchange_rate(from_currency=from_currency, to_currency=to_currency)
         exchange_rate_data = exchange_rate_data[0]
@@ -128,7 +128,7 @@ class DATA:
         Return best matching symbols and market information
         based on keywords. It raises ValueError when problems arise.
         :param keyword: name of company as string
-        :return: symbol search data
+        :return: symbol search data as pandas dataframe
         """
         symbol_search_data = self.ts.get_symbol_search(keywords=keyword)
         symbol_search_data = symbol_search_data[0]

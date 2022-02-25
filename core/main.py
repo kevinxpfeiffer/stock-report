@@ -21,54 +21,56 @@ while True:
         
         d = data.DATA(name=name, ticker="AAPL") # Create object data for search
         
-        print(d.symbol_search(keyword=name)) # Print searche
-        print("")
-        
-        print("What's the company's ticker?")
-        ticker = str(input(">>> "))
-        print("")
-        
-        #try:
-        print('One moment please, PDF is being generated...')
-        print("")
+        try:
+                print(d.symbol_search(keyword=name)) # Print searche
+                print("")
                 
-        d = data.DATA(name=name, ticker=ticker) # Create object data
-        a = analysis.ANALYSIS(data=d) # Create object analysis
+                print("What's the company's ticker?")
+                ticker = str(input(">>> "))
+                print("")
                 
-        a.main() # run analysis
-                
-        p = pdf.PDF(data=d, name=name, ticker=ticker) # Create object pdf
-                
-        p.new_page()
-        p.create_title()
-        p.key_figures()
-                
-        time.sleep(60) # time sleep for alpha vantage api
-        
-        p.new_page()
-        p.create_heading("Income Statement")
-        p.income_statement()
-                
-        p.new_page()
-        p.create_heading("Balance Sheet")
-        p.balance_sheet()
-                
-        p.new_page()
-        p.create_heading("Cashflow")
-        p.cash_flow()
-                
-        p.new_page()
-        p.create_heading("Technical Analysis")
-        p.technical_analysis()
-
-        p.pdf.output(f'{name}.pdf', 'F') # Create pdf
-        shutil.move(f'{name}.pdf', '/Users/kevinpfeiffer/Downloads') # Move pdf to output folder
+                print('One moment please, PDF is being generated...')
+                print("")
                         
-        print('PDF is ready!!!')
-        print("You can quit with ctrl + c everytime.")
-        print("")
-        
-       # except:
-                #print("Something must have gone wrong :(")
-                #print("Try again or quit with ctrl + c")
-                #print("")    
+                d = data.DATA(name=name, ticker=ticker) # Create object data
+                a = analysis.ANALYSIS(data=d) # Create object analysis
+                        
+                a.main() # run analysis
+                        
+                p = pdf.PDF(data=d, name=name, ticker=ticker) # Create object pdf
+                        
+                p.new_page()
+                p.create_title()
+                p.key_figures()
+                        
+                time.sleep(60) # time sleep for alpha vantage api
+                
+                p.new_page()
+                p.create_heading("Income Statement")
+                p.income_statement()
+                        
+                p.new_page()
+                p.create_heading("Balance Sheet")
+                p.balance_sheet()
+                        
+                p.new_page()
+                p.create_heading("Cashflow")
+                p.cash_flow()
+                        
+                p.new_page()
+                p.create_heading("Technical Analysis")
+                p.technical_analysis()
+
+                p.pdf.output(f'{name}.pdf', 'F') # Create pdf
+                
+                # -> change your destination folder here 
+                shutil.move(f'{name}.pdf', '/Users/kevinpfeiffer/Downloads') # Move pdf to output folder
+                # -> change your destination folder here
+                                
+                print('PDF is ready!!!')
+                print("You can quit with ctrl + c everytime.")
+                print("")
+        except:
+                print("Something must have gone wrong :(")
+                print("Try again or quit with ctrl + c")
+                print("")   
