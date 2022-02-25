@@ -38,7 +38,7 @@ setup(
     package_data={ 
         'stock-report': [],
     },
-    data_files=[('my_data', ['resources'])], 
+    # data_files=[('my_data', ['/resources'])], 
 
     project_urls={ 
         'Bug Reports': 'https://github.com/pfeiffer-dev/stock-report/issues',

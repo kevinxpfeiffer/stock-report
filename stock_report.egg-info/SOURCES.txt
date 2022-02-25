@@ -1,0 +1,15 @@
+LICENSE
+README.md
+pyproject.toml
+setup.cfg
+setup.py
+stock-report/__init__.py
+stock-report/__main__.py
+stock-report/analysis.py
+stock-report/data.py
+stock-report/pdf.py
+stock_report.egg-info/PKG-INFO
+stock_report.egg-info/SOURCES.txt
+stock_report.egg-info/dependency_links.txt
+stock_report.egg-info/requires.txt
+stock_report.egg-info/top_level.txt
