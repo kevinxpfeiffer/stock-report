@@ -3,7 +3,6 @@
 # Copyright 2022 Kevin Pfeiffer
 # MIT License
 
-from scipy.stats import norm
 import plotly.express as px
 import pandas as pd
 
