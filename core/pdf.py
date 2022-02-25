@@ -246,7 +246,7 @@ class PDF:
             self.kff(data_co, "Dividend Date", "DividendDate", 205, left_position=False)
             self.kff(data_co, "Ex Dividend Date", "ExDividendDate", 210, left_position=False)
         except:
-            a = 1
+            pass
             
         try:
             # access data
