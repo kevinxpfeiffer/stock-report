@@ -1,6 +1,6 @@
 ![Logo StockReport](https://github.com/pfeiffer-dev/stock-report/blob/main/stock_report/resources/logo.png?raw=true "Logo Stock Report")
 
-**StockReport is a Phyton program that allows you to simply create an automated PDF report about a stock.**
+**StockReport is a Python program that allows you to simply create an automated PDF report about a stock.**
 
 ---
 
