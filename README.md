@@ -1,9 +1,6 @@
 ![Logo StockReport](resources/logo.png "Logo Stock Report")
 
-**Stock Report generates a report on a selected stock**
-* Methode1
-* Methode2
-* Methode3
+**StockReport is a Phyton program that allows you to simply create an automated PDF report about a stock.**
 ---
 
 ## Installation
@@ -13,15 +10,19 @@ pip install alpha_vantage
 pip install pandas
 pip install fpdf
 pip install plotly
-pip inatall kaleido
 ```
+Then install stock-report:
+```
+pip install stock-report
+```
+
 ## Usage
 ### Alpha Vantage
 This project is build with the [Alpha Vantage API ](https://www.alphavantage.co)
 
 You can request a free key at the following link: [Claim API Key](https://www.alphavantage.co/support/#api-key)
 
-**Save your key as an environment variable**
+### Save your key as an environment variable
 
 ***Mac***
 1. From your terminal, type in: `export ALPHAVANTAGE_API_KEY=xxx`
@@ -40,27 +41,19 @@ or
 2. In the new window that pops up, click New under the User variables section.
 3. Your variable name should be `ALPHAVANTAGE_API_KEY` and the variable value is where you can paste in your key.
 
-
-## Examples
+### Run
 Run with
 ```
 python3 -m stock-report
 ```
+
+## Examples
+You can view the examples [here](examples).
+
 ## License
 MIT
-## Bibliography
+[See here](LICENSE)
 
-
-
-
----
-
-```python
-s = "Python syntax highlighting"
-print(s)
-```
-> Blockquotes 
->> neste
 
 
 
