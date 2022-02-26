@@ -1,6 +1,7 @@
 ![Logo StockReport](resources/logo.png "Logo Stock Report")
 
 **StockReport is a Phyton program that allows you to simply create an automated PDF report about a stock.**
+
 ---
 
 ## Installation
@@ -42,7 +43,7 @@ or
 3. Your variable name should be `ALPHAVANTAGE_API_KEY` and the variable value is where you can paste in your key.
 
 ### Run
-Run with
+Run with:
 ```
 python3 -m stock-report
 ```
