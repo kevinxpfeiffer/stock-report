@@ -7,7 +7,7 @@ long_description = (here / 'README.md').read_text(encoding='utf-8')
 
 setup(
     name='stock-report',
-    version='0.0.16',
+    version='0.0.17',
     description='StockReport is a Phyton program that allows you to simply create an automated PDF report about a stock.',
     long_description=long_description,
     long_description_content_type='text/markdown',
