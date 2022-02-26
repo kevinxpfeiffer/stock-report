@@ -1,12 +1,12 @@
-name: Packaging tutorial problem
-description: Request help for a problem following a packaging tutorial
-title: Trouble with a packaging tutorial
+name: Bug Report
+description: Report a Bug or request help for a problem with stock-portfolio.
+title: Bug Report
 
 body:
 - type: markdown
   attributes:
     value: |
-      Thank you for providing feedback on Python packaging!
+      Thank you for providing feedback on stock-portfolio!
 
       To help us help you, please fill out as much of the following as you can.
 
@@ -49,15 +49,6 @@ body:
     required: true
 
 
-
-- type: input
-  id: guide
-  attributes:
-    label: Guide link
-    description: |
-      If you are following an online tutorial or guide, please provide a link to the page or section giving you trouble.
-
-
 - type: textarea
   id: problem
   attributes:
@@ -65,7 +56,7 @@ body:
     description: |
       Please describe your problem in as much detail as possible.
       
-      Include all the commands that you ran, any offline guides you followed, etc.
+      Include all the commands that you ran, etc.
   validations:
     required: true
 
