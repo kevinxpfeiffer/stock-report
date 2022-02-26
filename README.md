@@ -11,6 +11,7 @@ pip install alpha_vantage
 pip install pandas
 pip install fpdf
 pip install plotly
+pip install kaleido
 ```
 Then install stock-report:
 ```
