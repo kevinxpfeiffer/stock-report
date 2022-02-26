@@ -54,10 +54,3 @@ You can view the examples [here](examples).
 ## License
 MIT
 [See here](LICENSE)
-
-
-
-
- 
-
- 
