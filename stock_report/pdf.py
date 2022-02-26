@@ -36,7 +36,7 @@ class PDF:
         this_dir, this_filename = os.path.split(__file__)
         
         header = os.path.join(this_dir, "resources", "header.png")
-        footer = os.path.join(this_dir, "recources", "footer.png")
+        footer = os.path.join(this_dir, "resources", "footer.png")
         
         self.pdf.image(header, 0, 0, self.width)
         self.pdf.image(footer, 0, 252, self.width)
