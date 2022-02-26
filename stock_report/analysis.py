@@ -3,6 +3,7 @@
 # Copyright 2022 Kevin Pfeiffer
 # MIT License
 
+import os
 import plotly.express as px
 import pandas as pd
 
@@ -64,18 +65,19 @@ class ANALYSIS:
 
         # Create plots
         plot_data = ticker[::-1]  # reverse dataframe for better displaying
+        download_folder = os.path.expanduser("~")+"/Downloads/" #! Zwischenspeicher
 
         # Plot of MACD
         plot_macd = px.line(data_frame=plot_data[0:365],
                         y=['MACD', 'Signal Line'],
                         title='MACD')
-        plot_macd.write_image('/resources/macd.png', format='png', width=1000, height=500)
+        plot_macd.write_image(f'{download_folder}/macd.png', format='png', width=1000, height=500)
 
         # Plot of SMA
         plot_sma = px.line(data_frame=plot_data[0:365],
                         y=['4. close', 'SMA 30 Days', 'SMA 100 Days'],
                         title='Simple Moving Average')
-        plot_sma.write_image('/resources/sma.png', format='png', width=1000, height=500)
+        plot_sma.write_image(f'{download_folder}/sma.png', format='png', width=1000, height=500)
 
         # Plot of RSI
         plot_rsi = px.line(data_frame=plot_data[0:365],
@@ -83,22 +85,22 @@ class ANALYSIS:
                                 title='Relative Strength Index')
         plot_rsi.add_hline(y=30, line_width=3, line_dash="dash", line_color="green")
         plot_rsi.add_hline(y=70, line_width=3, line_dash="dash", line_color="red")
-        plot_rsi.write_image('/resources/rsi.png', format='png', width=1000, height=500)
+        plot_rsi.write_image(f'{download_folder}/rsi.png', format='png', width=1000, height=500)
 
         # Plot of Bollinger Bands
         plot_bb = px.line(data_frame=plot_data[0:365],
                         y=['4. close', 'Moving Average 30 Days', 'Upper Band', 'Lower Band'],
                         title='Bolinger Bands')
-        plot_bb.write_image('/resources/bb.png', format='png', width=1000, height=500)
+        plot_bb.write_image(f'{download_folder}/bb.png', format='png', width=1000, height=500)
 
         # Plot of Maximal Drawdown
         plot_md = px.line(data_frame=plot_data[0:365],
                         y=['Maximal Drawdown'],
                         title='Maximal Drawdown')
-        plot_md.write_image('/resources/md.png', format='png', width=1000, height=500)
+        plot_md.write_image(f'{download_folder}/md.png', format='png', width=1000, height=500)
 
         # Plot of Daily Percentage Change
         plot_dpc = px.line(data_frame=plot_data[0:365],
                         y=['Daily Percentage Change'],
                         title='Daily Percentage Change')
-        plot_dpc.write_image('/resources/dpc.png', format='png', width=1000, height=500)
+        plot_dpc.write_image(f'{download_folder}/dpc.png', format='png', width=1000, height=500)

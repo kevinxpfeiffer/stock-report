@@ -3,6 +3,7 @@
 # Copyright 2022 Kevin Pfeiffer
 # MIT License
 
+import os
 from fpdf import FPDF
 from datetime import date
 
@@ -30,8 +31,8 @@ class PDF:
         """
         self.pdf.add_page()
         self.pdf.set_font("Arial", "B", 12)
-        self.pdf.image("/resources/header.png", 0, 0, self.width)
-        self.pdf.image("/resources/footer.png", 0, 252, self.width)
+        #! self.pdf.image("/resources/header.png", 0, 0, self.width)
+        #! self.pdf.image("/resources/footer.png", 0, 252, self.width)
 
 
     def create_title(self):
@@ -412,11 +413,13 @@ class PDF:
         """
         Insert plots in pdf
         """
-        self.pdf.image("/resources/sma.png", 5, 55, self.width - 10)
-        self.pdf.image("/resources/bb.png", 5, 150, self.width - 10)
+        download_folder = os.path.expanduser("~")+"/Downloads/" #! Zwischenspeicher
+        
+        self.pdf.image(f"{download_folder}/sma.png", 5, 55, self.width - 10)
+        self.pdf.image(f"{download_folder}/bb.png", 5, 150, self.width - 10)
         self.new_page()
-        self.pdf.image("/resources/macd.png", 5, 55, self.width - 10)
-        self.pdf.image("/resources/rsi.png", 5, 150, self.width - 10)
+        self.pdf.image(f"{download_folder}/macd.png", 5, 55, self.width - 10)
+        self.pdf.image(f"{download_folder}/rsi.png", 5, 150, self.width - 10)
         self.new_page()
-        self.pdf.image("/resources/dpc.png", 5, 55, self.width - 10)
-        self.pdf.image("/resources/md.png", 5, 150, self.width - 10)
+        self.pdf.image(f"{download_folder}/dpc.png", 5, 55, self.width - 10)
+        self.pdf.image(f"{download_folder}/md.png", 5, 150, self.width - 10)
