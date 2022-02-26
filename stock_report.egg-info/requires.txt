@@ -1,4 +1,0 @@
-alpha-vantage
-pandas
-fpdf
-plotly
