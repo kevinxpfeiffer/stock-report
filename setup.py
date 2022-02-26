@@ -23,8 +23,8 @@ setup(
         'Natural Language :: English',
     ],
     keywords='stock-market, pandas, pdf, report, fpdf, alpha-vantage, plotly-express',
-    packages=find_packages(include=['stock-report', 'stock-report.*']),
-    py_modules=['data', 'analysis', 'pdf'],
+    package_dir={"": "src"},
+    packages=find_packages(where="src"),
     python_requires='>=3.6',
     install_requires=[
         'alpha-vantage',
