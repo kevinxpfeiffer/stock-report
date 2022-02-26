@@ -7,7 +7,7 @@ long_description = (here / 'README.md').read_text(encoding='utf-8')
 
 setup(
     name='stock-report',
-    version='0.0.10',
+    version='0.0.12',
     description='StockReport is a Phyton program that allows you to simply create an automated PDF report about a stock.',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -23,8 +23,7 @@ setup(
         'Natural Language :: English',
     ],
     keywords='stock-market, pandas, pdf, report, fpdf, alpha-vantage, plotly-express',
-    package_dir={"": "src"},
-    packages=find_packages(where="src"),
+    packages=find_packages(),
     python_requires='>=3.6',
     install_requires=[
         'alpha-vantage',
