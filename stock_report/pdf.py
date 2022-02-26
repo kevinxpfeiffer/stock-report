@@ -3,8 +3,8 @@
 # Copyright 2022 Kevin Pfeiffer
 # MIT License
 
+
 import os
-import pkgutil
 from fpdf import FPDF
 from datetime import date
 
@@ -33,8 +33,10 @@ class PDF:
         self.pdf.add_page()
         self.pdf.set_font("Arial", "B", 12)
         
-        header = pkgutil.get_data(__name__, "resources/header.png")
-        footer = pkgutil.get_data(__name__, "resources/footer.png")
+        this_dir, this_filename = os.path.split(__file__)
+        
+        header = os.path.join(this_dir, "resources", "header.png")
+        footer = os.path.join(this_dir, "recources", "footer.png")
         
         self.pdf.image(header, 0, 0, self.width)
         self.pdf.image(footer, 0, 252, self.width)
