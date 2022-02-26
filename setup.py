@@ -7,7 +7,7 @@ long_description = (here / 'README.md').read_text(encoding='utf-8')
 
 setup(
     name='stock-report',
-    version='0.0.5',
+    version='0.0.6',
     description='StockReport is a Phyton program that allows you to simply create an automated PDF report about a stock.',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -24,6 +24,7 @@ setup(
     ],
     keywords='stock-market, pandas, pdf, report, fpdf, alpha-vantage, plotly-express',
     packages=find_packages(include=['stock-report', 'stock-report.*']),
+    py_modules=['data', 'analysis', 'pdf'],
     python_requires='>=3.6',
     install_requires=[
         'alpha-vantage',
@@ -35,7 +36,6 @@ setup(
     package_data={ 
         'stock-report': [],
     },
-
     project_urls={ 
         'Bug Reports': 'https://github.com/pfeiffer-dev/stock-report/issues',
         'Source': 'https://github.com/pfeiffer-dev/stock-report',
