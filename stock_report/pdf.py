@@ -412,11 +412,11 @@ class PDF:
         """
         Insert plots in pdf
         """
-        self.pdf.image("stock-report/resources/sma.png", 5, 55, self.width - 10)
-        self.pdf.image("stock-report/resources/bb.png", 5, 150, self.width - 10)
+        self.pdf.image("stock_report/resources/sma.png", 5, 55, self.width - 10)
+        self.pdf.image("stock_report/resources/bb.png", 5, 150, self.width - 10)
         self.new_page()
-        self.pdf.image("stock-report/resources/macd.png", 5, 55, self.width - 10)
-        self.pdf.image("stock-report/resources/rsi.png", 5, 150, self.width - 10)
+        self.pdf.image("stock_report/resources/macd.png", 5, 55, self.width - 10)
+        self.pdf.image("stock_report/resources/rsi.png", 5, 150, self.width - 10)
         self.new_page()
-        self.pdf.image("stock-report/resources/dpc.png", 5, 55, self.width - 10)
-        self.pdf.image("stock-report/resources/md.png", 5, 150, self.width - 10)
+        self.pdf.image("stock_report/resources/dpc.png", 5, 55, self.width - 10)
+        self.pdf.image("stock_report/resources/md.png", 5, 150, self.width - 10)
