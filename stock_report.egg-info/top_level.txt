@@ -1,1 +1,4 @@
+analysis
+data
+pdf
 stock-report
