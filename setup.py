@@ -7,7 +7,7 @@ long_description = (here / 'README.md').read_text(encoding='utf-8')
 
 setup(
     name='stock-report',
-    version='0.0.17',
+    version='0.0.19',
     description='StockReport is a Phyton program that allows you to simply create an automated PDF report about a stock.',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -29,7 +29,8 @@ setup(
         'alpha-vantage',
         'pandas',
         'fpdf',
-        'plotly'
+        'plotly',
+        'kaleido'
     ],
     include_package_data=True,
     package_data={ 

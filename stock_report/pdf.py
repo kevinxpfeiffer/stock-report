@@ -4,6 +4,7 @@
 # MIT License
 
 import os
+import pkgutil
 from fpdf import FPDF
 from datetime import date
 
@@ -31,8 +32,12 @@ class PDF:
         """
         self.pdf.add_page()
         self.pdf.set_font("Arial", "B", 12)
-        #! self.pdf.image("/resources/header.png", 0, 0, self.width)
-        #! self.pdf.image("/resources/footer.png", 0, 252, self.width)
+        
+        header = pkgutil.get_data(__name__, "resources/header.png")
+        footer = pkgutil.get_data(__name__, "resources/footer.png")
+        
+        self.pdf.image(header, 0, 0, self.width)
+        self.pdf.image(footer, 0, 252, self.width)
 
 
     def create_title(self):
@@ -413,13 +418,20 @@ class PDF:
         """
         Insert plots in pdf
         """
-        download_folder = os.path.expanduser("~")+"/Downloads/" #! Zwischenspeicher
+        download_folder = os.path.expanduser("~")+"/Downloads/"
         
-        self.pdf.image(f"{download_folder}/sma.png", 5, 55, self.width - 10)
-        self.pdf.image(f"{download_folder}/bb.png", 5, 150, self.width - 10)
+        self.pdf.image(f"{download_folder}/stock-report_sma.png", 5, 55, self.width - 10)
+        self.pdf.image(f"{download_folder}/stock-report_bb.png", 5, 150, self.width - 10)
         self.new_page()
-        self.pdf.image(f"{download_folder}/macd.png", 5, 55, self.width - 10)
-        self.pdf.image(f"{download_folder}/rsi.png", 5, 150, self.width - 10)
+        self.pdf.image(f"{download_folder}/stock-report_macd.png", 5, 55, self.width - 10)
+        self.pdf.image(f"{download_folder}/stock-report_rsi.png", 5, 150, self.width - 10)
         self.new_page()
-        self.pdf.image(f"{download_folder}/dpc.png", 5, 55, self.width - 10)
-        self.pdf.image(f"{download_folder}/md.png", 5, 150, self.width - 10)
+        self.pdf.image(f"{download_folder}/stock-report_dpc.png", 5, 55, self.width - 10)
+        self.pdf.image(f"{download_folder}/stock-report_md.png", 5, 150, self.width - 10)
+        
+        os.remmove(f"{download_folder}/stock-report_sma.png")
+        os.remmove(f"{download_folder}/stock-report_bb.png")
+        os.remmove(f"{download_folder}/stock-report_macd.png")
+        os.remmove(f"{download_folder}/stock-report_rsi.png")
+        os.remmove(f"{download_folder}/stock-report_dpc.png")
+        os.remmove(f"{download_folder}/stock-report_md.png")
