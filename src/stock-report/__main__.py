@@ -6,9 +6,9 @@
 import shutil
 import os
 import time
-from stock-report import data
-from stock-report import analysis
-from stock-report import pdf
+import data
+import analysis
+import pdf
 
 print("")
 print("Welcome to Stock Report...")

@@ -7,7 +7,7 @@ long_description = (here / 'README.md').read_text(encoding='utf-8')
 
 setup(
     name='stock-report',
-    version='0.0.9',
+    version='0.0.10',
     description='StockReport is a Phyton program that allows you to simply create an automated PDF report about a stock.',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -34,7 +34,17 @@ setup(
     ],
     include_package_data=True,
     package_data={ 
-        'stock-report': [],
+        'resources': [
+            'resources/bb.png',
+            'resources/dpc.png',
+            'resources/footer.png',
+            'resources/header.png',
+            'resources/logo.png',
+            'resources/macd.png',
+            'resources/md.png',
+            'resources/rsi.png',
+            'resources/sma.png',
+            ],
     },
     project_urls={ 
         'Bug Reports': 'https://github.com/pfeiffer-dev/stock-report/issues',
