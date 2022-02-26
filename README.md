@@ -1,4 +1,4 @@
-![Logo StockReport](resources/logo.png "Logo Stock Report")
+![Logo StockReport](https://github.com/pfeiffer-dev/stock-report/blob/main/resources/logo.png "Logo Stock Report")
 
 **StockReport is a Phyton program that allows you to simply create an automated PDF report about a stock.**
 
@@ -49,8 +49,8 @@ python3 -m stock-report
 ```
 
 ## Examples
-You can view the examples [here](examples).
+You can view the examples [here](https://github.com/pfeiffer-dev/stock-report/tree/main/examples)).
 
 ## License
 MIT
-[See here](LICENSE)
+[See here](https://github.com/pfeiffer-dev/stock-report/blob/main/LICENSE))
