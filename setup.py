@@ -8,7 +8,7 @@ long_description = (here / 'README.md').read_text(encoding='utf-8')
 setup(
     name='stock-report',
     version='1.0.0',
-    description='StockReport is a Phyton program that allows you to simply create an automated PDF report about a stock.',
+    description='StockReport is a Python program that allows you to simply create an automated PDF report about a stock.',
     long_description=long_description,
     long_description_content_type='text/markdown',
     url='https://github.com/pfeiffer-dev/stock-report',

@@ -28,7 +28,7 @@ class PDF:
 
     def new_page(self):
         """
-        Creates a new pdf page with deafault header and footer.
+        Creates a new pdf page with default header and footer.
         """
         self.pdf.add_page()
         self.pdf.set_font("Arial", "B", 12)

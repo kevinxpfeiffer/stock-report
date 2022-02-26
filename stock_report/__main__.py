@@ -24,7 +24,7 @@ while True:
         d = data.DATA(name=name, ticker="AAPL") # Create object data for search
         
         try:
-                print(d.symbol_search(keyword=name)) # Print searche
+                print(d.symbol_search(keyword=name)) # Print search
                 print("")
                         
                 print("What's the company's ticker?")
