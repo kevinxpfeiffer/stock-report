@@ -10,6 +10,7 @@ import data
 import analysis
 import pdf
 
+
 print("")
 print("Welcome to Stock Report...")
 print("Here you can carry out an automatic analysis of a share of your choice and receive the result as a PDF.")
