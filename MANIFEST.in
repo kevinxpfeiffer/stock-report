@@ -2,3 +2,12 @@ include README.md
 include LICENSE
 
 include stock-report/resources
+include stock-report/resources/bb.png
+include stock-report/resources/dpc.png
+include stock-report/resources/footer.png
+include stock-report/resources/header.png
+include stock-report/resources/logo.png
+include stock-report/resources/macd.png
+include stock-report/resources/md.png
+include stock-report/resources/rsi.png
+include stock-report/resources/sma.png
