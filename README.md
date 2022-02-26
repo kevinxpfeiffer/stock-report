@@ -48,6 +48,8 @@ Run with:
 python3 -m stock-report
 ```
 
+You can find your pdf in the download folder
+
 ## Examples
 You can view the examples [here](https://github.com/pfeiffer-dev/stock-report/tree/main/examples).
 
