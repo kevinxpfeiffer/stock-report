@@ -30,8 +30,8 @@ class PDF:
         """
         self.pdf.add_page()
         self.pdf.set_font("Arial", "B", 12)
-        self.pdf.image("stock-report/resources/header.png", 0, 0, self.width)
-        self.pdf.image("stock-report/resources/footer.png", 0, 252, self.width)
+        self.pdf.image("resources/header.png", 0, 0, self.width)
+        self.pdf.image("resources/footer.png", 0, 252, self.width)
 
 
     def create_title(self):
@@ -412,11 +412,11 @@ class PDF:
         """
         Insert plots in pdf
         """
-        self.pdf.image("stock_report/resources/sma.png", 5, 55, self.width - 10)
-        self.pdf.image("stock_report/resources/bb.png", 5, 150, self.width - 10)
+        self.pdf.image("resources/sma.png", 5, 55, self.width - 10)
+        self.pdf.image("resources/bb.png", 5, 150, self.width - 10)
         self.new_page()
-        self.pdf.image("stock_report/resources/macd.png", 5, 55, self.width - 10)
-        self.pdf.image("stock_report/resources/rsi.png", 5, 150, self.width - 10)
+        self.pdf.image("resources/macd.png", 5, 55, self.width - 10)
+        self.pdf.image("resources/rsi.png", 5, 150, self.width - 10)
         self.new_page()
-        self.pdf.image("stock_report/resources/dpc.png", 5, 55, self.width - 10)
-        self.pdf.image("stock_report/resources/md.png", 5, 150, self.width - 10)
+        self.pdf.image("resources/dpc.png", 5, 55, self.width - 10)
+        self.pdf.image("resources/md.png", 5, 150, self.width - 10)

@@ -45,7 +45,7 @@ or
 ### Run
 Run with:
 ```
-python3 -m stock-report
+python3 -m stock_report
 ```
 
 You can find your pdf in the download folder.
