@@ -49,8 +49,8 @@ python3 -m stock-report
 ```
 
 ## Examples
-You can view the examples [here](https://github.com/pfeiffer-dev/stock-report/tree/main/examples)).
+You can view the examples [here](https://github.com/pfeiffer-dev/stock-report/tree/main/examples).
 
 ## License
 MIT
-[See here](https://github.com/pfeiffer-dev/stock-report/blob/main/LICENSE))
+[See here](https://github.com/pfeiffer-dev/stock-report/blob/main/LICENSE)
